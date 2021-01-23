@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "olcLearning", "olcLearning\olcLearning.vcxproj", "{8BE072C6-5CBA-4B14-8573-16EF1CCC9846}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testeGIt", "testeGIt\testeGIt.vcxproj", "{187DD675-1D68-4A53-A14D-194DA28123BA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,14 +21,6 @@ Global
 		{8BE072C6-5CBA-4B14-8573-16EF1CCC9846}.Release|x64.Build.0 = Release|x64
 		{8BE072C6-5CBA-4B14-8573-16EF1CCC9846}.Release|x86.ActiveCfg = Release|Win32
 		{8BE072C6-5CBA-4B14-8573-16EF1CCC9846}.Release|x86.Build.0 = Release|Win32
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Debug|x64.ActiveCfg = Debug|x64
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Debug|x64.Build.0 = Debug|x64
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Debug|x86.ActiveCfg = Debug|Win32
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Debug|x86.Build.0 = Debug|Win32
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Release|x64.ActiveCfg = Release|x64
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Release|x64.Build.0 = Release|x64
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Release|x86.ActiveCfg = Release|Win32
-		{187DD675-1D68-4A53-A14D-194DA28123BA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
