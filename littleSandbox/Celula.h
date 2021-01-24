@@ -1,7 +1,8 @@
 #pragma once
-#include <iostream>
-using namespace std;
+#include <vector>
+#include <algorithm>
 
+float const gravidade = 10;
 const unsigned char color_vec[2][3] = { {65, 105,225},{105, 105, 105} };
 
 typedef enum
@@ -10,7 +11,7 @@ typedef enum
 	CINZA
 }COLOR;
 
-enum class MATERIAL 
+enum MATERIAL 
 {
 	AGUA,
 	PEDRA
@@ -19,7 +20,7 @@ enum class MATERIAL
 
 typedef struct
 {
-	int material;
+	MATERIAL material;
 	float densidade;
 	COLOR cor;
 	float pos_x;
@@ -27,8 +28,20 @@ typedef struct
 	float dx;
 	float dy;
 	bool fixo;
+	float temperatura;
 }CelulaStruct;
 
-CelulaStruct createCelula(int material, float posx, float posy);
 
-void destroyCelula(CelulaStruct celula);
+void createCelula(MATERIAL material, float posx, float posy);
+
+void destroyCelula(int posx, int posy);
+
+bool hasCelula(int posx, int posy);
+
+void updateCelula(std::vector<CelulaStruct>::iterator celula, float fElapsedTime);
+
+std::vector<CelulaStruct>::iterator getVectorBegin();
+
+std::vector<CelulaStruct>::iterator getVectorEnd();
+
+bool collision(std::vector<CelulaStruct>::iterator celula);

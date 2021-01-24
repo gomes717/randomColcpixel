@@ -1,12 +1,9 @@
 #define OLC_PGE_APPLICATION
-#include "Celula.h"
 #include "olcPixelGameEngine.h"
-#include <iostream>
+#include "Celula.h"
 
-static float gravidade = 10;
-std::vector<CelulaStruct> vec_pixels;
 
-void cleanScreen();
+
 
 // Override base class with your custom functionality
 class SandBox : public olc::PixelGameEngine
@@ -31,29 +28,46 @@ public:
 	bool OnUserUpdate(float fElapsedTime) override
 	{
 
-		
+		/*
 		for (int x = 0; x < ScreenWidth(); x++)
 			for (int y = 0; y < ScreenHeight(); y++)
-				Draw(x, y, olc::Pixel(255, 255, 255));
+				Draw(x, y, olc::Pixel(255, 255, 255));*/
 
 		// called once per frame, draws random coloured pixels
 
-		if (PixelGameEngine::GetMouse(0).bHeld)
-			vec_pixels.push_back(createCelula(0, PixelGameEngine::GetMousePos().x, PixelGameEngine::GetMousePos().y));
+		int x = PixelGameEngine::GetMousePos().x;
+		int y = PixelGameEngine::GetMousePos().y;
+		if (PixelGameEngine::GetMouse(0).bHeld && !hasCelula(x, y))
+			createCelula(AGUA, x, y);
 
-		if (PixelGameEngine::GetMouse(1).bHeld)
-			vec_pixels.push_back(createCelula(1, PixelGameEngine::GetMousePos().x, PixelGameEngine::GetMousePos().y));
-
-		for (std::vector<CelulaStruct>::iterator pixel_aux = vec_pixels.begin(); pixel_aux != vec_pixels.end(); ++pixel_aux)
+		if (PixelGameEngine::GetMouse(1).bHeld && !hasCelula(x, y))
+			createCelula(PEDRA, x, y);
+		if (PixelGameEngine::GetMouse(2).bHeld && hasCelula(x, y))
 		{
-			if(!pixel_aux->fixo)
+			Draw(x, y, olc::Pixel(255, 255, 255, 255));
+			destroyCelula(x, y);
+		}
+			
+		
+		for (std::vector<CelulaStruct>::iterator pixel_aux = getVectorBegin(); pixel_aux != getVectorEnd(); ++pixel_aux)
+		{
+			Draw(pixel_aux->pos_x, pixel_aux->pos_y, olc::Pixel(255,255,255,255));
+			if (!pixel_aux->fixo) {
 				pixel_aux->dy += gravidade * fElapsedTime;
+				collision(pixel_aux);
 				pixel_aux->pos_x += pixel_aux->dx * fElapsedTime;
 				pixel_aux->pos_y += pixel_aux->dy * fElapsedTime;
+			}
+
+			if (pixel_aux->pos_y > PixelGameEngine::ScreenHeight()) {
+				destroyCelula(pixel_aux->pos_x, pixel_aux->pos_y);
+				break;
+			}
 			Draw(pixel_aux->pos_x, pixel_aux->pos_y, olc::Pixel(color_vec[pixel_aux->cor][0],
 																color_vec[pixel_aux->cor][1],
 																color_vec[pixel_aux->cor][2],
 																255));
+
 		}
 		return true;
 	}
@@ -62,7 +76,7 @@ public:
 int main()
 {
 	SandBox demo;
-	if (demo.Construct(256, 240, 4, 4))
+	if (demo.Construct(128, 120, 8, 8))
 		demo.Start();
 	return 0;
 }
