@@ -5,6 +5,7 @@
 
 
 
+
 // Override base class with your custom functionality
 class SandBox : public olc::PixelGameEngine
 {
@@ -22,6 +23,7 @@ public:
 		for (int x = 0; x < ScreenWidth(); x++)
 			for (int y = 0; y < ScreenHeight(); y++)
 				Draw(x, y, olc::Pixel(255, 255, 255));
+		createWorld(ScreenHeight(), ScreenWidth());
 		return true;
 	}
 
@@ -52,12 +54,7 @@ public:
 		for (std::vector<CelulaStruct>::iterator pixel_aux = getVectorBegin(); pixel_aux != getVectorEnd(); ++pixel_aux)
 		{
 			Draw(pixel_aux->pos_x, pixel_aux->pos_y, olc::Pixel(255,255,255,255));
-			if (!pixel_aux->fixo) {
-				pixel_aux->dy += gravidade * fElapsedTime;
-				collision(pixel_aux);
-				pixel_aux->pos_x += pixel_aux->dx * fElapsedTime;
-				pixel_aux->pos_y += pixel_aux->dy * fElapsedTime;
-			}
+			pixel_aux = updateCelula(pixel_aux, fElapsedTime);
 
 			if (pixel_aux->pos_y > PixelGameEngine::ScreenHeight()) {
 				destroyCelula(pixel_aux->pos_x, pixel_aux->pos_y);
@@ -78,5 +75,6 @@ int main()
 	SandBox demo;
 	if (demo.Construct(128, 120, 8, 8))
 		demo.Start();
+	destroyWorld();
 	return 0;
 }

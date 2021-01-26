@@ -31,6 +31,9 @@ typedef struct
 	float temperatura;
 }CelulaStruct;
 
+void createWorld(int height, int widht);
+
+void destroyWorld();
 
 void createCelula(MATERIAL material, float posx, float posy);
 
@@ -38,7 +41,9 @@ void destroyCelula(int posx, int posy);
 
 bool hasCelula(int posx, int posy);
 
-void updateCelula(std::vector<CelulaStruct>::iterator celula, float fElapsedTime);
+bool hasCelulaMat(int posx, int posy);
+
+std::vector<CelulaStruct>::iterator updateCelula(std::vector<CelulaStruct>::iterator celula, float fElapsedTime);
 
 std::vector<CelulaStruct>::iterator getVectorBegin();
 
